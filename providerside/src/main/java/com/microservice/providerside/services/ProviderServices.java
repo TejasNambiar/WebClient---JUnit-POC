@@ -20,9 +20,6 @@ public class ProviderServices implements IServicesInterface {
     ProvidersRepository providersRepository;
 
     @Autowired
-    CustomersRepository customersRepository;
-
-    @Autowired
     IWebClientInterface webClientInterface;
 
     @Override

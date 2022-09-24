@@ -30,8 +30,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ContextConfiguration(classes = {ProviderServices.class, ProvidersDTO.class})
 @ExtendWith(SpringExtension.class)
 class ProviderServicesTest {
-    @MockBean
-    private CustomersRepository customersRepository;
+//    @MockBean
+//    private CustomersRepository customersRepository;
 
     @MockBean
     private IWebClientInterface iWebClientInterface;
@@ -78,13 +78,12 @@ class ProviderServicesTest {
     @Test
     @DisplayName("Test - Get Customers via Provider")
     void testGetAllCustomersViaProvider() {
-        ArrayList<Customers> customersList = new ArrayList<>();
-        when(customersRepository.findAll()).thenReturn(customersList);
-        when(iWebClientInterface.getCustomerListViaProvider((String) any())).thenReturn(new ArrayList<>());
+        ArrayList<CustomersDTO> customersList = new ArrayList<>();
+//        when(customersRepository.findAll()).thenReturn(customersList);
+        when(iWebClientInterface.getCustomerListViaProvider((String) any())).thenReturn(customersList);
         List<CustomersDTO> actualAllCustomersViaProvider = providerServices.getAllCustomersViaProvider("Provider");
         assertSame(customersList, actualAllCustomersViaProvider);
         assertTrue(actualAllCustomersViaProvider.isEmpty());
-        verify(customersRepository).findAll();
         verify(iWebClientInterface).getCustomerListViaProvider((String) any());
     }
 }
